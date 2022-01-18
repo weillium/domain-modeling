@@ -4,6 +4,8 @@
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS activity_log;
 DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS industry_map;
+DROP TABLE IF EXISTS industry;
 DROP TABLE IF EXISTS account_manager;
 
 -- CREATE TABLES
@@ -11,6 +13,7 @@ CREATE TABLE contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT,
     last_name TEXT,
+    title TEXT,
     email TEXT,
     phone TEXT,
     account_id INTEGER
@@ -27,21 +30,31 @@ CREATE TABLE activity_log (
 
 CREATE TABLE accounts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    account TEXT,
-    industry TEXT,
-)
+    name TEXT,
+);
+
+CREATE TABLE industry_map {
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    account_id INTEGER,
+    industry_id INTEGER
+};
+
+CREATE TABLE industries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
 
 CREATE TABLE account_manager (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT,
     last_name TEXT,
     email TEXT
-)
+);
 
-
+/*
 SELECT 
     accounts.account, 
-    accounts.industry, 
+    industry.name, 
     CONCAT(
         contacts.first_name, 
         " ", 

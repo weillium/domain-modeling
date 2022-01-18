@@ -1,32 +1,29 @@
 -- Drops existing tables, so we start fresh with each
 -- run of this script
 -- e.g. DROP TABLE IF EXISTS ______;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS like_state;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS follows;
-DROP TABLE IF EXISTS feed;
-
 
 -- CREATE TABLES
-CREATE TABLE user (
+CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    screen_name TEXT,
+    user_name TEXT,
     first_name TEXT, 
     last_name TEXT,
     location TEXT
 );
 
-CREATE TABLE post (
+CREATE TABLE posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    photo IMAGE,
+    image_file TEXT,
     post_time DATETIME,
-    like_count INTEGER,
     user_id INTEGER
 );
 
-CREATE TABLE like_state {
+CREATE TABLE likes {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
     post_id INTEGER
@@ -36,16 +33,11 @@ CREATE TABLE comments {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     post_id INTEGER,
     user_id INTEGER,
-    comment TEXT
+    body TEXT
 };
 
 CREATE TABLE follows {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
-    follow_id INTEGER
-};
-
-CREATE TABLE feed {
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    post_id INTEGER,
+    follower_user_id INTEGER,
+    followed_user_id INTEGER
 };
